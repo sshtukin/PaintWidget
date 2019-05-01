@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="paintWidget_marginTop">8dp</dimen>
+    <dimen name="paintWidget_marginStart">8dp</dimen>
+    <dimen name="paintWidget_marginEnd">8dp</dimen>
+    <dimen name="SeekBar_maxHeight">8dp</dimen>
+    <dimen name="paintWidget_marginBottom">8dp</dimen>
+    <dimen name="PaintWidgetRG_marginBottom">16dp</dimen>
+    <dimen name="paintWidget_width">214dp</dimen>
+    <dimen name="paintWidget_height">156dp</dimen>
+    <dimen name="thumb_height">24dp</dimen>
+    <dimen name="thumb_width">24dp</dimen>
+    <dimen name="seekBar_radius">8dp</dimen>
+</resources>

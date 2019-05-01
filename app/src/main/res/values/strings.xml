@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PaintWidget</string>
+    <string name="show">Show</string>
+    <string name="hide">Hide</string>
+    <string name="width">Width:</string>
+    <string name="colors">Colors:</string>
+    <string name="color_changed">Color changed</string>
+    <string name="width_changed">Width changed</string>
+</resources>

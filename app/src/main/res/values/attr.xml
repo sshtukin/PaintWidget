@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PaintWidget">
+        <attr name="seekBarMaxWidth" format="integer"/>
+        <attr name="defaultColorPosition" format="integer"/>
+        <attr name="firstItemColor"  format="enum">
+            <enum name="MAGENTA" value="0xFFFF00FF"/>
+            <enum name="BLACK" value="0xFF000000"/>
+            <enum name="YELLOW" value="0xFFFFFF00"/>
+        </attr>
+    </declare-styleable>
+</resources>
