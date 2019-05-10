@@ -12,13 +12,12 @@ import kotlinx.android.synthetic.main.activity_main.*
  * @author Sergey Shtukin
  */
 
-class MainActivity : AppCompatActivity(), PaintWidgetListener {
+class MainActivity : AppCompatActivity(), PaintWidget.PaintWidgetListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        paintWidget.paintWidgetListener = this
         btnHide.setOnClickListener {
             paintWidget.visibility = View.GONE
         }
@@ -27,11 +26,11 @@ class MainActivity : AppCompatActivity(), PaintWidgetListener {
         }
     }
 
-    override fun onChangeColor() {
+    override fun onChangedColor() {
         Toast.makeText(this, getString(R.string.color_changed), Toast.LENGTH_LONG).show()
     }
 
-    override fun onChangeWidth() {
+    override fun onChangedWidth() {
         Toast.makeText(this, getString(R.string.width_changed), Toast.LENGTH_LONG).show()
     }
 }

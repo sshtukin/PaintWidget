@@ -17,30 +17,24 @@ class PaintRadioButton(
     context: Context?, attrs: AttributeSet?
 ) : RadioButton(context, attrs) {
 
-    private val paintGrayCircle = Paint()
     private val paintCircle = Paint()
 
     var color: Int = Color.BLACK
-        set(value) {
-            field = value
-            paintCircle.color = color
-        }
 
     init {
-        paintGrayCircle.color = Color.GRAY
-        paintGrayCircle.style = Paint.Style.FILL
-        paintCircle.color = color
         paintCircle.style = Paint.Style.FILL
     }
 
     override fun onDraw(canvas: Canvas?) {
         if (isChecked) {
+            paintCircle.color = Color.GRAY
             canvas?.drawCircle(
                 (width / 2).toFloat(),
                 (height / 2).toFloat(),
                 (width / 4).toFloat(),
-                paintGrayCircle
+                 paintCircle
             )
+            paintCircle.color = color
             canvas?.drawCircle(
                 (width / 2).toFloat(),
                 (height / 2).toFloat(),
@@ -48,6 +42,7 @@ class PaintRadioButton(
                 paintCircle
             )
         } else {
+            paintCircle.color = color
             canvas?.drawCircle(
                 (width / 2).toFloat(),
                 (height / 2).toFloat(),

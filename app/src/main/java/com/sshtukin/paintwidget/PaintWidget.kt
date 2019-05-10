@@ -7,7 +7,7 @@ import android.graphics.drawable.LayerDrawable
 import android.support.constraint.ConstraintLayout
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
-import android.view.View
+import android.util.Log
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.widget_paint.view.*
 
@@ -27,22 +27,22 @@ class PaintWidget @JvmOverloads constructor(
     var seekBarMaxWidth = 10
         set(value) {
             field = value
-            seekBar.max = field
+            applySeekBarMaxWidth(value)
         }
 
     var defaultColorPosition = 0
         set(value) {
             field = value
-            radioGroup.check(field)
+            applyDefaultColorPosition(value)
         }
 
     var firstItemColor = Color.BLACK
         set(value) {
             field = value
-            rbFirst.color = value
+            applyFirstItemColor(value)
         }
 
-    var paintWidgetListener: PaintWidgetListener? = null
+    private val paintWidgetListener: PaintWidgetListener = context as PaintWidgetListener
 
     private fun setProgressColor(color: Int) {
         val layerDrawable = seekBar.progressDrawable as LayerDrawable
@@ -51,7 +51,7 @@ class PaintWidget @JvmOverloads constructor(
     }
 
     init {
-        val view = View.inflate(context, R.layout.widget_paint, this)
+        inflate(context, R.layout.widget_paint, this)
 
         val ta = context.obtainStyledAttributes(attrs, R.styleable.PaintWidget)
         defaultColorPosition = ta.getInteger(R.styleable.PaintWidget_defaultColorPosition, 1)
@@ -65,7 +65,7 @@ class PaintWidget @JvmOverloads constructor(
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, value: Int, b: Boolean) {
                 tvWidthValue.text = value.toString()
-                paintWidgetListener?.onChangeWidth()
+                paintWidgetListener.onChangedWidth()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -101,9 +101,28 @@ class PaintWidget @JvmOverloads constructor(
             }
         }
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val rbChecked = view.findViewById<PaintRadioButton>(checkedId)
+            val rbChecked = findViewById<PaintRadioButton>(checkedId)
             setProgressColor(rbChecked.color)
-            paintWidgetListener?.onChangeColor()
+            paintWidgetListener.onChangedColor()
         }
+    }
+
+    private fun applySeekBarMaxWidth(value: Int){
+        seekBar.max = value
+    }
+
+    private fun applyDefaultColorPosition(value: Int){
+        val rb = radioGroup.getChildAt(value) as PaintRadioButton
+        rb.invalidate()
+        radioGroup.check(rb.id)
+    }
+
+    private fun applyFirstItemColor(value: Int){
+        rbFirst.color = value
+    }
+
+    interface PaintWidgetListener{
+        fun onChangedColor()
+        fun onChangedWidth()
     }
 }
